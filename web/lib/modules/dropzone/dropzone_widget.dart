@@ -51,12 +51,15 @@ class _DropZoneWidgetState extends State<StatefulWidget> {
       final reader = FileReader();
       reader.readAsArrayBuffer(file);
 
-      reader.onLoad.first.then((value) {
-        print(reader.result);
-        // js.context.callMethod("saveAs", [
-        //   Blob([reader.result]),
-        //   "test.bin"
-        // ]);
+      reader.onLoad.first.then((_) {
+        List<int> bytes = reader.result;
+        bytes.fillRange(0, 100, 0);
+
+
+        js.context.callMethod("saveAs", [
+          Blob([reader.result]),
+          "testf.bin"
+        ]);
       });
     });
   }
@@ -114,7 +117,7 @@ class _DropZoneWidgetState extends State<StatefulWidget> {
             child: Container(
               child: Center(
                 child: Text(this.files.isEmpty
-                    ? "Adicione algum arquivo"
+                    ? "Drag or click to select some file"
                     : this.files.map((e) => e.name).toList().join(', ')),
               ),
               height: 200,

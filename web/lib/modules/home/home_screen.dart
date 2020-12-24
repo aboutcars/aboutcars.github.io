@@ -1,9 +1,7 @@
-import 'package:airbagcleaner/modules/dropzone/dropzone_widget.dart';
+import 'package:airbagcleaner/modules/item/item_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -15,60 +13,112 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          height: 400.0,
-          width: 400.0,
-          padding: EdgeInsets.all(16.0),
+        appBar: AppBar(
+          centerTitle: false,
+          backgroundColor: Colors.white,
+          title: Text("Airbag Cleaner", style: TextStyle(color: Colors.black)),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.plus_one, color: Colors.black),
+              tooltip: 'Contribute',
+              onPressed: () {},
+            ),
+          ],
+        ),
+        body: Container(
+          margin: EdgeInsets.only(left: 32.0, top: 32.0, right: 32.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              DropdownButton(
-                  value: currentBrand,
-                  onChanged: (String newValue) {
-                    setState(() {
-                      currentBrand = newValue;
-                    });
-                  },
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  items: <String>['One', 'Two', 'Free', 'Four']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList()),
-              SizedBox(height: 8.0),
-              DropdownButton(
-                  value: currentModel,
-                  onChanged: (String newValue) {
-                    setState(() {
-                      currentModel = newValue;
-                    });
-                  },
-                  isExpanded: true,
-                  iconSize: 30.0,
-                  items: <String>['One', 'Two', 'Free', 'Four']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList()),
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(),
+                        labelText: 'Busca',
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 8.0),
+                  Expanded(
+                    child: Container(
+                      height: 50.0,
+                      child: DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          value: currentBrand,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              currentBrand = newValue;
+                            });
+                          },
+                          items: <String>['One', 'Two', 'Free', 'Four']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList()),
+                    ),
+                  ),
+                  SizedBox(width: 8.0),
+                  Expanded(
+                    child: Container(
+                      height: 50.0,
+                      child: DropdownButtonFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          value: currentModel,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              currentModel = newValue;
+                            });
+                          },
+                          isExpanded: true,
+                          items: <String>['One', 'Two', 'Free', 'Four']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList()),
+                    ),
+                  )
+                ],
+              ),
               SizedBox(height: 16.0),
-              DropZoneWidget(),
-              SizedBox(height: 16.0),
-              RaisedButton(onPressed: () {}, child: Text("Remover"))
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: 32,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(4.0),
+                      child: Container(
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.0),
+                            color: Colors.grey,
+                          )),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ItemScreen()),
+                        );
+                      },
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(height: 8.0);
+                  },
+                ),
+              )
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
