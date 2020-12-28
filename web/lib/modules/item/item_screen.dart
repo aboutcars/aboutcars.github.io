@@ -32,6 +32,7 @@ class ItemScreen extends StatelessWidget {
             Row(
               children: [
                 Image.network('assets/'+airbag.brand.image, width: 128),
+                SizedBox(width: 8.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

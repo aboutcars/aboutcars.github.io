@@ -68,7 +68,7 @@ class _DropZoneWidgetState extends State<StatefulWidget> {
 
         js.context.callMethod("saveAs", [
           Blob([reader.result]),
-          "${file.name}_clear.bin"
+          "${file.name.replaceAll('.bin', '')}_clear.bin"
         ]);
       });
     });
