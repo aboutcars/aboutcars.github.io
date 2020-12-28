@@ -45,12 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final tempBrands = List<Brand>.from(json
           .decode(
-              await DefaultAssetBundle.of(context).loadString("brands.json"))
+              await DefaultAssetBundle.of(context).loadString("data/brands.json"))
           .map((e) => Brand.fromJson(e))
           .toList());
 
       final tempAll = List<Airbag>.from(json
-          .decode(await DefaultAssetBundle.of(context).loadString("data.json"))
+          .decode(await DefaultAssetBundle.of(context).loadString("data/data.json"))
           .map((e) => Airbag.fromJson(e))
           .toList());
 
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.network('assets/' + airbag.brand.image,
+                                  Image.network('assets/data/' + airbag.brand.image,
                                       width: 128),
                                   Expanded(
                                     child: Column(
