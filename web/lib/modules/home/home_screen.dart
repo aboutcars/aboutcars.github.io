@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:airbagcleaner/models/airbag.dart';
 import 'package:airbagcleaner/modules/item/item_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
@@ -104,11 +109,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             borderRadius: BorderRadius.circular(4.0),
                             color: Colors.grey,
                           )),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ItemScreen()),
-                        );
+                      onTap: () async {
+                        String data = await DefaultAssetBundle.of(context).loadString("data.json");
+                        List<dynamic> data2 = json.decode(data);
+                        List<Airbag> airbags = data2.map((e) => Airbag.fromJson(e)).toList();
+
+                        print(airbags[0]);
+
+                        // Response response = await Dio().get("data.json");
+                        // print(response);
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => ItemScreen()),
+                        // );
                       },
                     );
                   },
