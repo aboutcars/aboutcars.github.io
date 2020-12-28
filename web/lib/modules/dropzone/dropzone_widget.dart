@@ -2,19 +2,28 @@ import 'dart:async';
 import 'dart:html';
 import 'dart:js' as js;
 
+import 'package:airbagcleaner/modules/parser/parser.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 enum DragState { over, enter, leave }
 
 class DropZoneWidget extends StatefulWidget {
+  final Parser parser;
+
+  DropZoneWidget(this.parser);
+
   @override
   State<StatefulWidget> createState() {
-    return _DropZoneWidgetState();
+    return _DropZoneWidgetState(parser);
   }
 }
 
 class _DropZoneWidgetState extends State<StatefulWidget> {
+  Parser parser;
+
+  _DropZoneWidgetState(this.parser);
+
   StreamSubscription<MouseEvent> onDragOverSubscription;
   StreamSubscription<MouseEvent> onDragEnterSubscription;
   StreamSubscription<MouseEvent> onDragLeaveSubscription;
@@ -44,6 +53,7 @@ class _DropZoneWidgetState extends State<StatefulWidget> {
     pointStreamController.sink.add(null);
 
     this.setState(() {
+      this.files = [];
       this.files = this.files..addAll(value.dataTransfer.files);
 
       final file = this.files.first;
@@ -53,12 +63,12 @@ class _DropZoneWidgetState extends State<StatefulWidget> {
 
       reader.onLoad.first.then((_) {
         List<int> bytes = reader.result;
-        bytes.fillRange(0, 100, 0);
 
+        bytes = parser.process(bytes);
 
         js.context.callMethod("saveAs", [
           Blob([reader.result]),
-          "testf.bin"
+          "${file.name}_clear.bin"
         ]);
       });
     });

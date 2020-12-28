@@ -27,10 +27,10 @@ dependencies:
   file_picker: ^2.1.4
   tuple: ^1.0.3
   carousel_slider: ^2.3.1
-  dio: ^3.0.10
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.1
+  font_awesome_flutter: ^8.11.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +52,50 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - data.json
+    - brands.json
+    - acura.png
+    - alfa_romeo.png
+    - audi.png
+    - buick.png
+    - cadillac.png
+    - chevrolet.png
+    - chrysler.png
+    - citroen.png
+    - dacia.png
+    - daihatsu.png
+    - dodge.png
+    - fiat.png
+    - ford.png
+    - honda.png
+    - hyundai.png
+    - infiniti.png
+    - isuzu.png
+    - iveco.png
+    - jaguar.png
+    - kia.png
+    - lancia.png
+    - land_rover.png
+    - lexus.png
+    - mazda.png
+    - mercedes.png
+    - mini.png
+    - mitsubishi.png
+    - opel.png
+    - peugeot.png
+    - pontiac.png
+    - porsche.png
+    - renault.png
+    - rover.png
+    - saab.png
+    - seat.png
+    - skoda.png
+    - smart.png
+    - ssang_yong.png
+    - subaru.png
+    - suzuki.png
+    - toyota.png
+    - volkswagen.png
+    - volvo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

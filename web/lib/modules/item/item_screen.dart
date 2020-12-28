@@ -1,13 +1,14 @@
+import 'package:airbagcleaner/models/airbag.dart';
 import 'package:airbagcleaner/modules/dropzone/dropzone_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class ItemScreen extends StatefulWidget {
-  @override
-  _ItemScreenState createState() => _ItemScreenState();
-}
+class ItemScreen extends StatelessWidget {
 
-class _ItemScreenState extends State<ItemScreen> {
+  final Airbag airbag;
+
+  ItemScreen(this.airbag);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,66 +29,67 @@ class _ItemScreenState extends State<ItemScreen> {
         margin: EdgeInsets.only(left: 32.0, top: 32.0, right: 32.0),
         child: ListView(
           children: [
-            Text("Info", style: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8.0),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(text: 'Brand: '),
-                  TextSpan(
-                      text: 'Honda'.toUpperCase(),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(text: 'Car: '),
-                  TextSpan(
-                      text: 'Civic'.toUpperCase(),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(text: 'Year: '),
-                  TextSpan(
-                      text: '2015'.toUpperCase(),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(text: 'Chip Info: '),
-                  TextSpan(
-                      text: '95320'.toUpperCase(),
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            RichText(
-              text: TextSpan(
-                style: TextStyle(color: Colors.black),
-                children: <TextSpan>[
-                  TextSpan(text: 'COD: '),
-                  TextSpan(
-                      text: '1T454-454-FFFF-EEEE'.toUpperCase(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.0)),
-                ],
-              ),
+            Row(
+              children: [
+                Image.network('assets/'+airbag.brand.image, width: 128),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Brand: '),
+                          TextSpan(
+                              text: airbag.brand.brand.toUpperCase(),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Model: '),
+                          TextSpan(
+                              text: airbag.model.toUpperCase(),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Chip Info: '),
+                          TextSpan(
+                              text: airbag.ci.toUpperCase(),
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(color: Colors.black),
+                        children: <TextSpan>[
+                          TextSpan(text: 'COD: '),
+                          TextSpan(
+                              text: airbag.info.toUpperCase(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16.0)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
             SizedBox(height: 32.0),
-            Text("Images", style: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.bold)),
+            Text("Images",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold)),
             SizedBox(height: 8.0),
             CarouselSlider(
               options: CarouselOptions(height: 400.0),
@@ -105,9 +107,13 @@ class _ItemScreenState extends State<ItemScreen> {
               }).toList(),
             ),
             SizedBox(height: 32.0),
-            Text("Upload Crash File", style: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.bold)),
+            Text("Upload Crash File",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold)),
             SizedBox(height: 8.0),
-            DropZoneWidget(),
+            DropZoneWidget(airbag.parser),
             SizedBox(height: 32.0)
           ],
         ),
