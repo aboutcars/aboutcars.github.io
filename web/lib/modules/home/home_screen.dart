@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:airbagcleaner/models/airbag.dart';
 import 'package:airbagcleaner/models/brand.dart';
 import 'package:airbagcleaner/modules/item/item_screen.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -153,27 +154,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(airbag.brand.brand.toUpperCase(),
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold)),
-                                          Text(airbag.model)
+                                          Expanded(
+                                            child: AutoSizeText(airbag.brand.brand.toUpperCase(),
+                                                style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.bold)),
+                                          ),
+                                          Expanded(child: AutoSizeText(airbag.model))
                                         ]),
                                   ),
+                                  SizedBox(width: 8.0),
                                   Expanded(
+                                    flex: 2,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text(airbag.info.toUpperCase(),
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 24.0)),
-                                        Text(airbag.ci.toUpperCase(),
-                                            style: TextStyle(fontSize: 16.0)),
+                                        Expanded(
+                                          child: AutoSizeText(airbag.info.toUpperCase(),
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 24.0)),
+                                        ),
+                                        Expanded(
+                                          child: AutoSizeText(airbag.ci.toUpperCase(),
+                                              style: TextStyle(fontSize: 16.0)),
+                                        ),
                                       ],
                                     ),
                                   ),
+                                  SizedBox(width: 16.0),
                                   IconButton(
                                       icon: Icon(Icons.arrow_forward),
                                       onPressed: () => {
