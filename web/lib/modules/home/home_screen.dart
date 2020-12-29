@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.network('assets/data/' + airbag.brand.image,
+                                  Image.asset('data/' + airbag.brand.image,
                                       width: 128),
                                   Expanded(
                                     child: Column(

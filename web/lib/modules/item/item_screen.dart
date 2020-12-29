@@ -17,13 +17,6 @@ class ItemScreen extends StatelessWidget {
         centerTitle: false,
         backgroundColor: Colors.white,
         title: Text("Airbag Cleaner", style: TextStyle(color: Colors.black)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.plus_one, color: Colors.black),
-            tooltip: 'Contribute',
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Container(
         margin: EdgeInsets.only(left: 32.0, top: 32.0, right: 32.0),
@@ -31,7 +24,7 @@ class ItemScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.network('assets/data/'+airbag.brand.image, width: 128),
+                Image.asset('data/'+airbag.brand.image, width: 128),
                 SizedBox(width: 8.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
